@@ -30,7 +30,7 @@ while k <= 10:
 print(f"k = {k}")
 print(f"i = {i}")
 
-#HASKELL
+# HASKELL
 module Main where
 
 loop :: Int -> Int
