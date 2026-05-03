@@ -1,31 +1,49 @@
-#include <stdio.h>
+# PYTHON
+j = -3
+i = 0
+while i < 3 and j <= 0:
+    v = j + 2
+    if v == 3 or v == 2:
+        j -= 1
+    elif v == 0:
+        j += 2
+    else:
+        j = 0
 
-int main() {
-    int i, j;
+    if j <= 0:
+        j = 3 - i
+    i += 1
 
-    j = -3;
-
-    for (i = 0; i < 3 && !(j > 0); i++) {
-
-        // Substituição do switch sem break
-        if ((j + 2) == 3 || (j + 2) == 2) {
-            j--;
-        } else if ((j + 2) == 0) {
-            j += 2;
-        } else {
-            j = 0;
-        }
-
-        // O "if (j > 0) break" foi absorvido
-        // pela condição do for: !(j > 0)
-        if (!(j > 0)) {
-            j = 3 - i;
-        }
-
+# JAVA
+int j = -3;
+int i = 0;
+while (i < 3 && j <= 0) {
+    int v = j + 2;
+    if (v == 3 || v == 2) {
+        j--;
+    } else if (v == 0) {
+        j += 2;
+    } else {
+        j = 0;
     }
 
-    printf("i = %d\n", i);
-    printf("j = %d\n", j);
-
-    return 0;
+    if (j <= 0) {
+        j = 3 - i;
+    }
+    i++;
 }
+
+# HASKELL
+loop :: Int -> Int -> Int
+loop i j
+  | i >= 3 || j > 0 = j          -- condição de parada (substitui o break e o limite do for)
+  | otherwise       = loop (i + 1) nextJ
+  where
+    v    = j + 2
+    newJ | v == 3 || v == 2 = j - 1   -- cases 3 e 2 (substitui o switch/break)
+         | v == 0            = j + 2   -- case 0
+         | otherwise         = 0      -- default
+    nextJ = if newJ <= 0 then 3 - i else newJ
+
+result :: Int
+result = loop 0 (-3)
